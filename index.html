@@ -65,6 +65,7 @@
             height: 100%;
             object-fit: cover;
             transform: translate(-50%, -50%);
+            cursor: pointer;
         }
         .slide-title {
             position: absolute;
@@ -89,19 +90,19 @@
 
 <div id="slideshow-container">
     <div class="slide">
-        <img src="_assets/01.jpg" alt="Image 1">
+        <img src="_assets/01.jpg" alt="Image 1" onclick="changeSlide(1)">
         <div class="slide-title">Title 1</div>
     </div>
     <div class="slide">
-        <img src="_assets/02.jpg" alt="Image 2">
+        <img src="_assets/02.jpg" alt="Image 2" onclick="changeSlide(1)">
         <div class="slide-title">Title 2</div>
     </div>
     <div class="slide">
-        <img src="_assets/03.jpg" alt="Image 3">
+        <img src="_assets/03.jpg" alt="Image 3" onclick="changeSlide(1)">
         <div class="slide-title">Title 3</div>
     </div>
     <div class="slide">
-        <img src="_assets/04.jpg" alt="Image 4">
+        <img src="_assets/04.jpg" alt="Image 4" onclick="changeSlide(1)">
         <div class="slide-title">Title 4</div>
     </div>
 </div>
