@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 
+	<!-- 
 
 
 
@@ -19,17 +19,81 @@
 
 
 -->
-<meta charset="UTF-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<title>Retina Ai</title>
-<meta name="description" content="AI creative production projects for fashion and beauty advertising">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+        }
+        .slide img {
+            width: 100%;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="b">
+<body>
 
-	<p>AI creative production projects for fashion and beauty advertising</p>
-		
+<div id="slideshow-container">
+    <div class="slide">
+        <img src="image1.jpg" alt="Image 1" onclick="changeSlide(1)">
+    </div>
+    <div class="slide">
+        <img src="image2.jpg" alt="Image 2" onclick="changeSlide(1)">
+    </div>
+    <div class="slide">
+        <img src="image3.jpg" alt="Image 3" onclick="changeSlide(1)">
+    </div>
+</div>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
+
+    function changeSlide(n) {
+        slideIndex += n;
+        showSlidesManually(slideIndex);
+    }
+
+    function showSlidesManually(n) {
+        let slides = document.getElementsByClassName("slide");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+</script>
+
 </body>
 </html>
