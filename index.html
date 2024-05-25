@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- 
-
-
-
-
-
-
-
-                        GUILLAUME BOUCHER
-
-                        @le.gui
-
-
-
-
-
-
--->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slideshow</title>
@@ -65,26 +47,14 @@
 </div>
 
 <script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        let slides = document.getElementsByClassName("slide");
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 5000); // Change image every 5 seconds
-    }
+    let slideIndex = 1;
+    showSlides(slideIndex);
 
     function changeSlide(n) {
-        slideIndex += n;
-        showSlidesManually(slideIndex);
+        showSlides(slideIndex += n);
     }
 
-    function showSlidesManually(n) {
+    function showSlides(n) {
         let slides = document.getElementsByClassName("slide");
         if (n > slides.length) {slideIndex = 1}
         if (n < 1) {slideIndex = slides.length}
