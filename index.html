@@ -49,18 +49,15 @@
             font-family: 'Helvetica Neue', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.5s;
+            transform: translateY(20px);
+            animation: slideIn 0.8s ease-out forwards;
         }
-        @keyframes fadeInUp {
+        @keyframes slideIn {
             0% {
-                opacity: 0;
-                transform: translate3d(0, 100%, 0);
+                transform: translateY(20px);
             }
             100% {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
+                transform: translateY(0);
             }
         }
     </style>
@@ -98,12 +95,4 @@
         let slides = document.getElementsByClassName("slide");
         if (n > slides.length) {slideIndex = 1}
         if (n < 1) {slideIndex = slides.length}
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slides[slideIndex-1].style.display = "block";
-    }
-</script>
-
-</body>
-</html>
+        for
