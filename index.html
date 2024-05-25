@@ -23,14 +23,14 @@
             width: 100%;
             height: 100%;
             display: grid;
-            grid-gap: 20px;
+            grid-gap: 40px;
             justify-content: center;
             align-content: center;
             background-color: white;
         }
         .circle {
-            width: 80px;
-            height: 80px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             background-color: black;
             color: white;
@@ -127,8 +127,8 @@
         const container = document.getElementById('pattern-container');
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
-        const dotSize = 80;
-        const gapSize = 20;
+        const dotSize = 160;
+        const gapSize = 40;
 
         const dotsPerRow = Math.floor(containerWidth / (dotSize + gapSize));
         const dotsPerColumn = Math.floor(containerHeight / (dotSize + gapSize));
@@ -145,6 +145,20 @@
         // Set the CSS grid-template-columns and grid-template-rows dynamically
         container.style.gridTemplateColumns = `repeat(${dotsPerRow}, ${dotSize}px)`;
         container.style.gridTemplateRows = `repeat(${dotsPerColumn}, ${dotSize}px)`;
+
+        // Add the numbered buttons randomly around the top left corner
+        for (let j = 1; j <= 4; j++) {
+            const button = document.createElement('div');
+            button.className = 'circle';
+            button.innerHTML = j;
+            button.style.position = 'absolute';
+            button.style.top = `${Math.random() * 200}px`;
+            button.style.left = `${Math.random() * 200}px`;
+            button.onclick = function() {
+                showSlide(j);
+            };
+            container.appendChild(button);
+        }
     }
 
     window.onload = createPolkaDots;
