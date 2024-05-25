@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slideshow</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap');
-
         body {
             font-family: 'Arial Black', Arial, sans-serif;
             margin: 0;
@@ -24,10 +22,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-gap: 20px;
             justify-content: center;
-            align-items: center;
+            align-content: center;
             background-color: white;
         }
         .circle {
@@ -39,7 +37,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px;
             cursor: pointer;
             font-size: 24px;
             text-align: center;
@@ -81,21 +78,7 @@
 </head>
 <body>
 
-<div id="pattern-container">
-    <div class="circle" onclick="showSlide(1)">1</div>
-    <div class="circle" onclick="showSlide(2)">2</div>
-    <div class="circle" onclick="showSlide(3)">3</div>
-    <div class="circle" onclick="showSlide(4)">4</div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-</div>
+<div id="pattern-container"></div>
 
 <div id="slideshow-container">
     <div class="slide">
@@ -139,6 +122,36 @@
         }
         slides[slideIndex-1].style.display = "block";
     }
+
+    function createPolkaDots() {
+        const container = document.getElementById('pattern-container');
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const dotSize = 80;
+        const gapSize = 20;
+
+        const dotsPerRow = Math.floor(containerWidth / (dotSize + gapSize));
+        const dotsPerColumn = Math.floor(containerHeight / (dotSize + gapSize));
+
+        for (let i = 0; i < dotsPerRow * dotsPerColumn; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'circle';
+            dot.onclick = function() {
+                showSlide((i % 4) + 1);
+            };
+            container.appendChild(dot);
+        }
+
+        // Set the CSS grid-template-columns and grid-template-rows dynamically
+        container.style.gridTemplateColumns = `repeat(${dotsPerRow}, ${dotSize}px)`;
+        container.style.gridTemplateRows = `repeat(${dotsPerColumn}, ${dotSize}px)`;
+    }
+
+    window.onload = createPolkaDots;
+    window.onresize = function() {
+        document.getElementById('pattern-container').innerHTML = '';
+        createPolkaDots();
+    };
 </script>
 
 </body>
