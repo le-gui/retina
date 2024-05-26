@@ -177,6 +177,14 @@
         <img src="_assets/04.jpg" alt="Image 4" onclick="changeSlide(1)">
         <!-- <div class="slide-title">Title 4</div> -->
     </div>
+    <div class="slide">
+        <img src="_assets/05.jpg" alt="Image 5" onclick="changeSlide(1)">
+        <!-- <div class="slide-title">Title 5</div> -->
+    </div>
+    <div class="slide">
+        <img src="_assets/06.jpg" alt="Image 6" onclick="changeSlide(1)">
+        <!-- <div class="slide-title">Title 6</div> -->
+    </div>
     <div class="info-slide" id="info-slide">
         <p>guillaume@retina.global</p>
     </div>
@@ -215,7 +223,7 @@
         slides[slideIndex - 1].style.display = "block";
 
         // Change nav button color for the second and third slides
-        if (slideIndex === 2 || slideIndex === 3) {
+        if (slideIndex === 2 || slideIndex === 3 || slideIndex === 5) {
             for (let button of navButtons) {
                 button.style.color = "black";
             }
