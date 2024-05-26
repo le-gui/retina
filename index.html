@@ -73,7 +73,6 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            transition: opacity 1s;
         }
 
         .slide img {
@@ -220,12 +219,9 @@
         if (n > slides.length) { slideIndex = 1; }
         if (n < 1) { slideIndex = slides.length; }
         for (let i = 0; i < slides.length; i++) {
-            slides[i].style.opacity = "0";
+            slides[i].style.display = "none";
         }
         slides[slideIndex - 1].style.display = "block";
-        setTimeout(() => {
-            slides[slideIndex - 1].style.opacity = "1";
-        }, 10);
 
         if (slideIndex === 2 || slideIndex === 3 || slideIndex === 5) {
             for (let button of navButtons) {
