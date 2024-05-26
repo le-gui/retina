@@ -205,6 +205,7 @@
     function displaySlide(n) {
         let slides = document.getElementsByClassName("slide");
         let infoSlide = document.getElementById("info-slide");
+        let navButtons = document.getElementsByClassName("nav-button");
         infoSlide.style.display = "none";
         if (n > slides.length) { slideIndex = 1; }
         if (n < 1) { slideIndex = slides.length; }
@@ -212,6 +213,17 @@
             slides[i].style.display = "none";
         }
         slides[slideIndex - 1].style.display = "block";
+
+        // Change nav button color for the second and third slides
+        if (slideIndex === 2 || slideIndex === 3) {
+            for (let button of navButtons) {
+                button.style.color = "black";
+            }
+        } else {
+            for (let button of navButtons) {
+                button.style.color = "white";
+            }
+        }
     }
 
     function displayInfoSlide() {
