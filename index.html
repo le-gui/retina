@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retina</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
             --polka-bg-image:
@@ -16,7 +15,7 @@
         }
 
         body {
-            font-family: 'Roboto', 'Arial Black', Arial, sans-serif;
+            font-family: 'Arial Black', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -98,7 +97,7 @@
             left: 20px;
             color: #ffffff;
             font-size: 24px;
-            font-family: 'Roboto', 'Arial Black', Arial, sans-serif;
+            font-family: 'Arial Black', Arial, sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -224,4 +223,54 @@
 
     function showSlide(n) {
         document.querySelector('.pattern-container').style.display = 'none';
-        document.getElementById('slideshow-container').style.display = 'bl
+        document.getElementById('slideshow-container').style.display = 'block';
+        slideIndex = n;
+        displaySlide(slideIndex);
+    }
+
+    function showInfoSlide() {
+        document.querySelector('.pattern-container').style.display = 'none';
+        document.getElementById('slideshow-container').style.display = 'block';
+        displayInfoSlide();
+    }
+
+    function changeSlide(n) {
+        displaySlide(slideIndex += n);
+    }
+
+    function displaySlide(n) {
+        let infoSlide = document.getElementById("info-slide");
+        let navButtons = document.getElementsByClassName("nav-button");
+        infoSlide.style.display = "none";
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+
+        if (slideIndex === 2 || slideIndex === 3 || slideIndex === 5) {
+            for (let button of navButtons) {
+                button.style.color = "black";
+            }
+        } else {
+            for (let button of navButtons) {
+                button.style.color = "white";
+            }
+        }
+    }
+
+    function displayInfoSlide() {
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        document.getElementById("info-slide").style.display = "flex";
+    }
+
+    window.onload = () => {
+        preloadImages();
+    };
+</script>
+
+</body>
+</html>
