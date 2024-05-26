@@ -56,8 +56,8 @@
 
         .circle .button {
             position: absolute;
-            right: -30px; /* Move the button further to the right */
-            font-size: 48px; /* Make the button text bigger */
+            right: -30px;
+            font-size: 48px;
         }
 
         #slideshow-container {
@@ -73,6 +73,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            transition: opacity 1s;
         }
 
         .slide img {
@@ -129,7 +130,7 @@
             align-items: center;
             font-size: 32px;
             cursor: pointer;
-            background: none; /* Remove background color */
+            background: none;
         }
     </style>
 </head>
@@ -162,28 +163,22 @@
         <div class="nav-button" onclick="showInfoSlide()">5</div>
     </div>
     <div class="slide">
-        <img src="_assets/01.jpg" alt="Image 1" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 1</div> -->
+        <img src="_assets/01.jpg" alt="Image 1" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="slide">
-        <img src="_assets/02.jpg" alt="Image 2" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 2</div> -->
+        <img src="_assets/02.jpg" alt="Image 2" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="slide">
-        <img src="_assets/03.jpg" alt="Image 3" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 3</div> -->
+        <img src="_assets/03.jpg" alt="Image 3" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="slide">
-        <img src="_assets/04.jpg" alt="Image 4" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 4</div> -->
+        <img src="_assets/04.jpg" alt="Image 4" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="slide">
-        <img src="_assets/05.jpg" alt="Image 5" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 5</div> -->
+        <img src="_assets/05.jpg" alt="Image 5" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="slide">
-        <img src="_assets/06.jpg" alt="Image 6" onclick="changeSlide(1)">
-        <!-- <div class="slide-title">Title 6</div> -->
+        <img src="_assets/06.jpg" alt="Image 6" loading="lazy" onclick="changeSlide(1)">
     </div>
     <div class="info-slide" id="info-slide">
         <p>guillaume@retina.global</p>
@@ -192,6 +187,14 @@
 
 <script>
     let slideIndex = 1;
+    let slides = document.getElementsByClassName("slide");
+
+    function preloadImages() {
+        for (let i = 0; i < slides.length; i++) {
+            const img = new Image();
+            img.src = slides[i].querySelector('img').src;
+        }
+    }
 
     function showSlide(n) {
         document.querySelector('.pattern-container').style.display = 'none';
@@ -211,18 +214,19 @@
     }
 
     function displaySlide(n) {
-        let slides = document.getElementsByClassName("slide");
         let infoSlide = document.getElementById("info-slide");
         let navButtons = document.getElementsByClassName("nav-button");
         infoSlide.style.display = "none";
         if (n > slides.length) { slideIndex = 1; }
         if (n < 1) { slideIndex = slides.length; }
         for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+            slides[i].style.opacity = "0";
         }
         slides[slideIndex - 1].style.display = "block";
+        setTimeout(() => {
+            slides[slideIndex - 1].style.opacity = "1";
+        }, 10);
 
-        // Change nav button color for the second and third slides
         if (slideIndex === 2 || slideIndex === 3 || slideIndex === 5) {
             for (let button of navButtons) {
                 button.style.color = "black";
@@ -235,12 +239,15 @@
     }
 
     function displayInfoSlide() {
-        let slides = document.getElementsByClassName("slide");
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
         document.getElementById("info-slide").style.display = "flex";
     }
+
+    window.onload = () => {
+        preloadImages();
+    };
 </script>
 
 </body>
