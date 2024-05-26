@@ -191,7 +191,6 @@
     let slides = [];
     let isTransitioning = false;
     const transitionDuration = 1.0;
-    let textureLoader = new THREE.TextureLoader();
 
     function init() {
         renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -230,8 +229,8 @@
 
         uniforms = {
             time: { type: 'f', value: 0.0 },
-            texture1: { type: 't', value: textureLoader.load('_assets/01.jpg') },
-            texture2: { type: 't', value: textureLoader.load('_assets/02.jpg') }
+            texture1: { type: 't', value: new THREE.TextureLoader().load('_assets/01.jpg') },
+            texture2: { type: 't', value: new THREE.TextureLoader().load('_assets/02.jpg') }
         };
 
         const material = new THREE.ShaderMaterial({
@@ -252,72 +251,3 @@
             uniforms.time.value += 0.02;
             if (uniforms.time.value >= transitionDuration) {
                 isTransitioning = false;
-                uniforms.time.value = 0.0;
-            }
-        }
-        renderer.render(scene, camera);
-    }
-
-    function showSlide(n) {
-        document.querySelector('.pattern-container').style.display = 'none';
-        document.getElementById('slideshow-container').style.display = 'block';
-        slideIndex = n;
-        displaySlide(slideIndex);
-    }
-
-    function showInfoSlide() {
-        document.querySelector('.pattern-container').style.display = 'none';
-        document.getElementById('slideshow-container').style.display = 'block';
-        displayInfoSlide();
-    }
-
-    function changeSlide(n) {
-        displaySlide(slideIndex += n);
-    }
-
-    function displaySlide(n) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-
-        let slides = document.getElementsByClassName("slide");
-        let navButtons = document.getElementsByClassName("nav-button");
-
-        if (n > slides.length) { slideIndex = 1; }
-        if (n < 1) { slideIndex = slides.length; }
-
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-
-        let currentSlide = slides[slideIndex - 1];
-        let nextSlide = slides[n - 1];
-
-        uniforms.texture1.value = textureLoader.load(currentSlide.querySelector('img').src);
-        uniforms.texture2.value = textureLoader.load(nextSlide.querySelector('img').src);
-
-        nextSlide.style.display = "block";
-
-        if (slideIndex === 2 || slideIndex === 3 || slideIndex === 5) {
-            for (let button of navButtons) {
-                button.style.color = "black";
-            }
-        } else {
-            for (let button of navButtons) {
-                button.style.color = "white";
-            }
-        }
-    }
-
-    function displayInfoSlide() {
-        let slides = document.getElementsByClassName("slide");
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        document.getElementById("info-slide").style.display = "flex";
-    }
-
-    window.onload = init;
-</script>
-
-</body>
-</html>
